@@ -1,6 +1,8 @@
-import { ImageBackground, View, StyleSheet, Text, Button } from "react-native";
-
+import { ImageBackground, View, StyleSheet, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 export const HomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -8,9 +10,13 @@ export const HomeScreen = () => {
         resizeMode="cover"
         style={styles.image}
       >
-        <View>
-          <Button title="Login"></Button>
-          <Button title="Sign Up"></Button>
+        <View style={styles.buttonContainer}>
+          <Button title="Login" style={styles.button}></Button>
+          <Button
+            title="Sign Up"
+            style={styles.button}
+            onPress={() => navigation.navigate("SignInScreen")}
+          ></Button>
         </View>
       </ImageBackground>
     </View>
@@ -21,6 +27,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    height: "10%",
+    width: "100%",
+  },
+
+  button: {
+    flex:1,
+    width: "20%",
+    height: 20,
+    margin: 10,
+  },
+
+  coloredText: {
+    color: "white",
+    fontSize: 42,
+    lineHeight: 84,
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: "#000000c0",
+  },
+
+  image: {
+    width: "100%",
+    height: "100%",
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+  },
+
   inputContainer: {
     flex: 1,
     justifyContent: "center",
@@ -38,31 +76,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
     padding: 10,
     borderRadius: 10,
-  },
-
-  buttonContainer: {
-    marginTop: 10,
-    flexDirection: "row",
-  },
-
-  button: {
-    width: "30%",
-    marginHorizontal: 8,
-  },
-
-  coloredText: {
-    color: "white",
-    fontSize: 42,
-    lineHeight: 84,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000c0",
-  },
-
-  image: {
-    width: "100%",
-    height: "100%",
-    flex: 1,
-    justifyContent: "center",
   },
 });
