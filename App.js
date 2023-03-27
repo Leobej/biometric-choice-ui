@@ -2,7 +2,12 @@ import { HomeScreen } from "./assets/components/screens/home/HomeScreen";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SignInScreen } from "./assets/components/screens/signIn/SignInScreen";
+import { SignUpScreen } from "./assets/components/screens/signUp/SignUpScreen";
+import { LoginScreen } from "./assets/components/screens/login/LoginScreen";
+import { VotingScreen } from "./assets/components/screens/voting/VotingScreen";
+import { ElectionHistory } from "./assets/components/screens/voting/ElectionHistory";
+import { UserDashboard } from "./assets/components/screens/voting/UserDashboard";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -15,8 +20,12 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="HomeScreen" component={HomeScreen}  />
-          <Stack.Screen name="SignInScreen" component={SignInScreen} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="VotingScreen" component={VotingScreen} />
+          <Stack.Screen name="ElectionHistory" component={ElectionHistory} />
+          <Stack.Screen name="UserDashboard" component={UserDashboard} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

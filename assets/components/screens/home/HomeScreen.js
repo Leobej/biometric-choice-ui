@@ -1,54 +1,59 @@
-import { ImageBackground, View, StyleSheet, Button } from "react-native";
+import { ImageBackground, View, StyleSheet } from "react-native";
+import { Button, TextInput, Title } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 export const HomeScreen = () => {
   const navigation = useNavigation();
-
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../../images/HomeScreenImage.jpg")}
-        resizeMode="cover"
-        style={styles.image}
-      >
+    
+    <ImageBackground
+      source={require("../../images/HomeScreenImage.jpg")}
+      resizeMode="cover"
+      style={styles.image}
+    >
+      <View style={styles.container}>
         <View style={styles.buttonContainer}>
-          <Button title="Login" style={styles.button}></Button>
           <Button
-            title="Sign Up"
+            mode="contained"
+            buttonColor="rgba(255, 0, 0, 0.2)"
+            onPress={() => navigation.navigate("LoginScreen")}
             style={styles.button}
-            onPress={() => navigation.navigate("SignInScreen")}
-          ></Button>
+            labelStyle={styles.buttonText}
+          >
+            Login
+          </Button>
+          <Button
+            mode="contained"
+            buttonColor="rgba(0, 0, 255, 0.2)"
+            onPress={() => navigation.navigate("SignUpScreen")}
+            style={styles.button}
+            labelStyle={styles.buttonText}
+          >
+            Sign Up
+          </Button>
         </View>
-      </ImageBackground>
-    </View>
+      </View>
+    </ImageBackground>
+
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 20,
   },
 
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    height: "10%",
-    width: "100%",
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: "50%", // This will push the buttons above the middle
   },
 
   button: {
-    flex:1,
-    width: "20%",
-    height: 20,
-    margin: 10,
-  },
-
-  coloredText: {
-    color: "white",
-    fontSize: 42,
-    lineHeight: 84,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000c0",
+    marginTop: 20,
+    width: "50%",
   },
 
   image: {
@@ -59,22 +64,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
 
-  inputContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
-    backgroundColor: "#311b6b",
-  },
-
-  textInput: {
-    borderWidth: 1,
-    color: "black",
-    backgroundColor: "white",
-    borderColor: "white",
-    width: "100%",
-    marginRight: 10,
-    padding: 10,
-    borderRadius: 10,
+  buttonText: {
+    fontSize: 16,
   },
 });

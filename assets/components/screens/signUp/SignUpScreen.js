@@ -1,72 +1,100 @@
-import { Button, Text, View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  ImageBackground,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import { Button, TextInput, Title } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-export const SignInScreen = () => {
+
+export const SignUpScreen = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSignUp = () => {
+    // Implement sign-up logic using your authentication method
+  };
+
   return (
-    <View style={styles.container}>
-      {/* <Text>Sign In Screen</Text> */}
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Go back"
-          style={styles.button}
-          onPress={() => navigation.navigate("HomeScreen")}
-        ></Button>
-      </View>
-    </View>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {/* <ImageBackground
+        source={require("../../images/HomeScreenImage.jpg")}
+        resizeMode="cover"
+        style={styles.image}
+      > */}
+        <View style={styles.container}>
+          <Title style={styles.title}>Sign Up</Title>
+          <TextInput
+            label="Email"
+            value={email}
+            onChangeText={setEmail}
+            style={styles.input}
+            mode="outlined"
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+          <TextInput
+            label="Password"
+            value={password}
+            onChangeText={setPassword}
+            style={styles.input}
+            mode="outlined"
+            secureTextEntry
+          />
+          <TextInput
+            label="Confirm Password"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            style={styles.input}
+            mode="outlined"
+            secureTextEntry
+          />
+          <Button
+            mode="contained"
+            onPress={handleSignUp}
+            style={styles.button}
+            labelStyle={styles.buttonText}
+            buttonColor="rgba(255, 0, 0, 0.2)"
+          >
+            Sign Up
+          </Button>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate("HomeScreen")}
+            style={styles.button}
+            labelStyle={styles.buttonText}
+          >
+            Back
+          </Button>
+        </View>
+      {/* </ImageBackground> */}
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: "100%",
-    width: "100%",
-  },
-
-  inputContainer: {
-    flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
-    backgroundColor: "#311b6b",
+    paddingHorizontal: 20,
   },
-
-  textInput: {
-    borderWidth: 1,
-    color: "black",
-    backgroundColor: "white",
-    borderColor: "white",
-    width: "100%",
-    marginRight: 10,
-    padding: 10,
-    borderRadius: 10,
-  },
-
-  buttonContainer: {
-    marginTop: 100,
-
-    justifyContent: "center",
-    align: "center",
-  },
-
-  button: {
-    flex: 1,
-    width: "30%",
-  },
-
-  coloredText: {
-    color: "white",
-    fontSize: 42,
-    lineHeight: 84,
+  title: {
+    fontSize: 32,
     fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000c0",
+    marginBottom: 24,
+    alignSelf: "center",
   },
-
-  image: {
-    width: "100%",
-    height: "100%",
-    flex: 1,
-    justifyContent: "center",
+  input: {
+    marginBottom: 16,
+  },
+  button: {
+    marginTop: 16,
+  },
+  buttonText: {
+    fontSize: 16,
   },
 });
