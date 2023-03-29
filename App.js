@@ -9,6 +9,7 @@ import { ElectionHistory } from "./assets/components/screens/voting/ElectionHist
 import { UserDashboard } from "./assets/components/screens/voting/UserDashboard";
 import { VotingInformation } from "./assets/components/screens/voting/VotingInformation";
 import { UpcomingElections } from "./assets/components/screens/voting/UpcomingElections";
+import { UserFingerprint } from "./assets/components/screens/voting/UserFingerprint";
 
 
 const Stack = createNativeStackNavigator();
@@ -31,6 +32,7 @@ export default function App() {
           <Stack.Screen name="UserDashboard" component={UserDashboard} />
           <Stack.Screen name="VotingInformation" component={VotingInformation} />
           <Stack.Screen name="UpcomingElections" component={UpcomingElections} />
+          <Stack.Screen name="UserFingerprint" component={UserFingerprint} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

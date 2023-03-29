@@ -55,7 +55,7 @@ export const SignUpScreen = () => {
           />
           <Button
             mode="contained"
-            onPress={handleSignUp}
+            onPress={() => navigation.navigate("UserFingerprint")}
             style={styles.button}
             labelStyle={styles.buttonText}
             buttonColor="rgba(255, 0, 0, 0.2)"
