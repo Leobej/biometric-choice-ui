@@ -2,44 +2,19 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { Button, TextInput, Title } from 'react-native-paper';
 
-const API_URL = '10.0.2.2';
+const API_URL = 'http://192.168.0.110:8080';
 
-export const UserFingerprint = () => {
-  const [fingerprint, setFingerprint] = useState("");
-  const [voter, setVoter] = useState({});
-  const [createdAt, setCreatedAt] = useState('');
-  const [password, setPassword] = useState('');
+export const UserFingerprint = ({ navigation }) => {
+  const [fingerprint, setFingerprint] = useState('');
+
 
   const handleGetVoter = async () => {
-   try {
-      const response = await fetch('https://reactnative.dev/movies.json');
-      const json = await response.json();
-      setData(json.movies);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlePostVoter = async () => {
     try {
-      const response = await fetch(`${API_URL}/voters`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fingerprint,
-          firstName: voter.firstName,
-          lastName: voter.lastName,
-          cnp: voter.cnp,
-          createdAt,
-          password,
-        }),
-      });
+      const response = await fetch(`${API_URL}/fingerprints/${fingerprint}`);
       const data = await response.json();
-      console.log(data);
+      
+      navigation.navigate('UserRegistrationForm', { fingerprint:data.fingerprint  }); // navigate to the next screen with the fingerprint as a parameter
+      console.debug(data);
     } catch (error) {
       console.error(error);
     }
@@ -56,31 +31,6 @@ export const UserFingerprint = () => {
       <TouchableOpacity style={styles.button} onPress={handleGetVoter}>
         <Text style={styles.buttonText}>Get Voter</Text>
       </TouchableOpacity>
-      {voter.firstName && (
-        <>
-          <Text style={styles.label}>First Name:</Text>
-          <Text style={styles.text}>{voter.firstName}</Text>
-          <Text style={styles.label}>Last Name:</Text>
-          <Text style={styles.text}>{voter.lastName}</Text>
-          <Text style={styles.label}>CNP:</Text>
-          <Text style={styles.text}>{voter.cnp}</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter Created At"
-            value={createdAt}
-            onChangeText={(text) => setCreatedAt(text)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Enter Password"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-          />
-          <TouchableOpacity style={styles.button} onPress={handlePostVoter}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
-        </>
-      )}
     </View>
   );
 };
