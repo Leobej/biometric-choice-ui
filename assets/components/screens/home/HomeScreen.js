@@ -24,7 +24,7 @@ export const HomeScreen = () => {
           <Button
             mode="contained"
             buttonColor="rgba(0, 0, 255, 0.2)"
-            onPress={() => navigation.navigate("SignUpScreen")}
+            onPress={() => navigation.navigate("UserFingerprint")}
             style={styles.button}
             labelStyle={styles.buttonText}
           >

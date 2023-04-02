@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity,ScrollView,KeyboardAvoidingView  } from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
-const API_URL = 'http://192.168.0.110:8080';
 
-export const UserRegistrationForm = ({ route,navigation }) => {
+const API_URL = 'http://192.168.24.236:8080';
+
+export const UserRegistrationForm = ({ route, navigation }) => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [cnp, setCnp] = useState('');
@@ -12,9 +13,9 @@ export const UserRegistrationForm = ({ route,navigation }) => {
   const [password, setPassword] = useState('');
   const fingerprint = route.params.fingerprint;
   const handleSubmit = async () => {
-   
+
     console.log(route.params)
-    
+
     try {
       const response = await fetch(`${API_URL}/voters`, {
         method: 'POST',
@@ -22,7 +23,7 @@ export const UserRegistrationForm = ({ route,navigation }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            fingerprint,
+          fingerprint,
           firstname,
           lastname,
           cnp,
@@ -40,7 +41,7 @@ export const UserRegistrationForm = ({ route,navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Register to Vote</Text>
+      {/* <Text style={styles.heading}>Register to Vote</Text>
       <View style={styles.fingerprintData}>
         <Text style={styles.label}>First Name:</Text>
         <Text style={styles.text}>{firstname}</Text>
@@ -50,8 +51,8 @@ export const UserRegistrationForm = ({ route,navigation }) => {
         <Text style={styles.text}>{cnp}</Text>
         {/* <Text style={styles.label}>Fingerprint:</Text>
         <Text style={styles.text}>{fingerprintData}</Text> */}
-      </View>
-      <KeyboardAvoidingView style={styles.form}>
+      {/* </View> */} 
+      <KeyboardAvoidingView behavior="padding" style={styles.form}>
         <TextInput
           style={styles.input}
           placeholder="First Name"
@@ -91,44 +92,47 @@ export const UserRegistrationForm = ({ route,navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  heading: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  fingerprintData: {
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 5,
-  },
-  text: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  form: {},
-  input: {
-    borderWidth: 1,
-    borderColor: '#333',
-    borderRadius: 5,
-    padding: 10,
-    marginVertical: 5,
-  },
-  button: {
-    backgroundColor: '#333',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
+    container: {
+      flex: 1,
+      padding: 20,
+    },
+    heading: {
+      fontSize: 32,
+      fontWeight: 'bold',
+      marginBottom: 20,
+    },
+    fingerprintData: {
+      marginBottom: 20,
+    },
+    label: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginVertical: 5,
+    },
+    text: {
+      fontSize: 18,
+      marginBottom: 10,
+    },
+    form: {
+      flex: 1,
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: '#333',
+      borderRadius: 5,
+      padding: 10,
+      marginVertical: 5,
+    },
+    button: {
+      backgroundColor: '#333',
+      padding: 10,
+      borderRadius: 5,
+      marginTop: 10,
+    },
+    buttonText: {
+      color: '#fff',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+  });
+  

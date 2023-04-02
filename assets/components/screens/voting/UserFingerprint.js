@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { Button, TextInput, Title } from 'react-native-paper';
 
-const API_URL = 'http://192.168.0.110:8080';
+const API_URL = 'http://192.168.24.236:8080';
 
 export const UserFingerprint = ({ navigation }) => {
   const [fingerprint, setFingerprint] = useState('');
