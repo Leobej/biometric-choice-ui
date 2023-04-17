@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Text, List, Title } from "react-native-paper";
-import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
+import { BarChart } from "react-native-chart-kit";
 
 const candidates = [
   { id: 1, name: "E.B.", votes: 120 },
@@ -12,6 +12,7 @@ const candidates = [
 
 ];
 
+
 export const VotingScreen = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
 
@@ -21,41 +22,45 @@ export const VotingScreen = () => {
 
   const renderChart = () => {
     return (
-      <VictoryChart theme={VictoryTheme.material} domainPadding={20}>
-        <VictoryBar
-          data={candidates}
-          x="name"
-          y="votes"
-          style={{
-            data: {
-              fill: ({ datum }) =>
-                selectedCandidate && selectedCandidate.id === datum.id
-                  ? "rgba(134, 65, 244, 0.8)"
-                  : "rgba(134, 65, 244, 0.4)",
-            },
-          }}
-          events={[
+      <View>
+      <BarChart
+        data={{
+          labels: candidates.map((candidate) => candidate.name),
+          datasets: [
             {
-              target: "data",
-              eventHandlers: {
-                onPressIn: () => {
-                  return [
-                    {
-                      target: "data",
-                      mutation: (props) => {
-                        const candidate = candidates.find(
-                          (c) => c.name === props.datum.name
-                        );
-                        handleCandidatePress(candidate);
-                      },
-                    },
-                  ];
-                },
-              },
+              data: candidates.map((candidate) => candidate.votes),
+              color: (opacity = 1) =>
+                selectedCandidate &&
+                selectedCandidate.name === candidate.name
+                  ? `rgba(134, 65, 244, ${opacity})`
+                  : `rgba(134, 65, 244, ${opacity})`,
             },
-          ]}
-        />
-      </VictoryChart>
+          ],
+        }}
+        width={350}
+        height={220}
+        yAxisLabel="Votes"
+        chartConfig={{
+          backgroundColor: "#fff",
+          backgroundGradientFrom: "#fff",
+          backgroundGradientTo: "#fff",
+          decimalPlaces: 0,
+          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+          style: {
+            borderRadius: 16,
+          },
+        }}
+        style={{
+          marginVertical: 8,
+          borderRadius: 16,
+        }}
+        onDataPointClick={(dataPoint) => {
+          const candidate = candidates.find((c) => c.name === dataPoint.label);
+          handleCandidatePress(candidate);
+        }}
+      />
+    </View>
     );
   };
 
