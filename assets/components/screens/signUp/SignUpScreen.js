@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import {
-  ImageBackground,
   View,
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import { Button, TextInput, Title } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios"; // Ensure axios is importedq
 
 export const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -15,63 +16,87 @@ export const SignUpScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSignUp = () => {
-    // Implement sign-up logic using your authentication method
+  const handleSignUp = async () => {
+    if (!email.includes("@")) {
+      Alert.alert("Invalid Email", "Please enter a valid email address");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Alert.alert("Password Mismatch", "Passwords do not match");
+      return;
+    }
+
+    try {
+      // HTTP POST request to backend
+      const response = await axios.post(
+        "http://10.0.2.2:8080/mobile-users/register",
+        {
+          email,
+          password,
+        }
+      );
+      console.log(response);
+
+      if (response.status === 201) {
+        Alert.alert("Success", "User created successfully", [
+          { text: "OK", onPress: () => navigation.navigate("HomeScreen") },
+        ]);
+      }
+    } catch (error) {
+      Alert.alert(
+        "Registration Failed",
+        "Failed to create user: " + error.message
+      );
+    }
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {/* <ImageBackground
-        source={require("../../images/HomeScreenImage.jpg")}
-        resizeMode="cover"
-        style={styles.image}
-      > */}
-        <View style={styles.container}>
-          <Title style={styles.title}>Sign Up</Title>
-          <TextInput
-            label="Email"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-            mode="outlined"
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <TextInput
-            label="Password"
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-            mode="outlined"
-            secureTextEntry
-          />
-          <TextInput
-            label="Confirm Password"
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            style={styles.input}
-            mode="outlined"
-            secureTextEntry
-          />
-          <Button
-            mode="contained"
-            onPress={() => navigation.navigate("UserFingerprint")}
-            style={styles.button}
-            labelStyle={styles.buttonText}
-            buttonColor="rgba(255, 0, 0, 0.2)"
-          >
-            Sign Up
-          </Button>
-          <Button
-            mode="contained"
-            onPress={() => navigation.navigate("HomeScreen")}
-            style={styles.button}
-            labelStyle={styles.buttonText}
-          >
-            Back
-          </Button>
-        </View>
-      {/* </ImageBackground> */}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Title style={styles.title}>Sign Up</Title>
+        <TextInput
+          label="Email"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
+          mode="outlined"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <TextInput
+          label="Password"
+          value={password}
+          onChangeText={setPassword}
+          style={styles.input}
+          mode="outlined"
+          secureTextEntry
+        />
+        <TextInput
+          label="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          style={styles.input}
+          mode="outlined"
+          secureTextEntry
+        />
+        <Button
+          mode="contained"
+          onPress={handleSignUp}
+          style={styles.button}
+          labelStyle={styles.buttonText}
+        >
+          Sign Up
+        </Button>
+        <Button
+          mode="contained"
+          onPress={() => navigation.navigate("HomeScreen")}
+          style={styles.button}
+          labelStyle={styles.buttonText}
+        >
+          Back
+        </Button>
+      </View>
     </TouchableWithoutFeedback>
   );
 };

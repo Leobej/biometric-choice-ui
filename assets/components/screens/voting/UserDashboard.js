@@ -10,7 +10,6 @@ export const UserDashboard = ({ navigation }) => {
         onPress={() => navigation.navigate('ProfileScreen')}
       >
         <Image
-        //   source={require('./path/to/your/profile/image')}
           style={styles.profileIcon}
         />
       </TouchableOpacity>
