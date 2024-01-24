@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ElectionStatisticsPanel } from "./ElectionStatisticsPanel";
+
 export const ElectionHistoryDetails = ({ route }) => {
   console.log(route);
   const { electionId } = route.params;
@@ -56,9 +57,11 @@ export const ElectionHistoryDetails = ({ route }) => {
       <Text style={styles.title}>{electionDetails.name}</Text>
       <Text>{electionDetails.description}</Text>
       <Text>{`Location: ${electionDetails.location}`}</Text>
+      <Text>Hello</Text>
       {/* Include the ElectionStatisticsPanel here */}
       <ElectionStatisticsPanel electionDetails={electionDetails} />
       {/* Display more details as needed */}
+      
     </View>
   );
 };
