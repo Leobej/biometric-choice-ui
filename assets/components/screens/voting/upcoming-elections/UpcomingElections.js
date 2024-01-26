@@ -68,28 +68,30 @@ export const UpcomingElections = () => {
     };
 
     return (
+      
       <TouchableOpacity
-        style={styles.item}
+        style={styles.panel}
         onPress={() => navigateToDetails(item)}
       >
-        <Text style={styles.title}>{item.description}</Text>
-        <Text style={styles.date}>
+        <Text style={styles.panelTitle}>{item.description}</Text>
+        <Text style={styles.panelText}>
           Start Date: {formatDate(item.startDate)}
         </Text>
-        <Text style={styles.date}>End Date: {formatDate(item.endDate)}</Text>
+        <Text style={styles.panelText}>End Date: {formatDate(item.endDate)}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Upcoming Elections</Text>
       {loading && <Text>Loading...</Text>}
       {error ? (
         <Text style={styles.error}>{error}</Text>
       ) : (
         <FlatList
           data={elections}
-          renderItem={renderItem} 
+          renderItem={renderItem}
           keyExtractor={(item) => item.electionId.toString()}
         />
       )}
@@ -100,22 +102,33 @@ export const UpcomingElections = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
-  },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    width: "100%", // Ensure full width
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
-    marginBottom: 8,
+    textAlign: "center",
+    marginBottom: 16,
   },
-  date: {
-    fontSize: 16,
-    marginBottom: 4,
+  panel: {
+    backgroundColor: "#f0f0f0",
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#d0d0d0",
+    borderStyle: "solid",
+  },
+  panelTitle: {
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  panelText: {
+    fontSize: 18,
+    textAlign: "center",
+    marginTop: 4,
   },
   error: {
     color: "red",
