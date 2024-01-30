@@ -21,14 +21,11 @@ export const SignUpScreen = () => {
       Alert.alert("Invalid Email", "Please enter a valid email address");
       return;
     }
-
     if (password !== confirmPassword) {
       Alert.alert("Password Mismatch", "Passwords do not match");
       return;
     }
-
     try {
-      // HTTP POST request to backend
       const response = await axios.post(
         "http://10.0.2.2:8080/mobile-users/register",
         {

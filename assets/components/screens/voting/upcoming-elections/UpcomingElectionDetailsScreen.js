@@ -42,6 +42,7 @@ export const UpcomingElectionDetailsScreen = ({ route }) => {
         }
       );
       setLocationDetails(response.data);
+      console.log(response.data);
     } catch (error) {
       setError("Could not fetch location details. " + error.message);
       console.error(error);
@@ -59,17 +60,18 @@ export const UpcomingElectionDetailsScreen = ({ route }) => {
           setLoading(false);
           return;
         }
-
+  
         const response = await axios.get(
           `http://10.0.2.2:8080/elections/${electionId}/details`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-
+  
         setElectionDetails(response.data);
-        if (electionDetails && electionDetails.locationId) {
-          fetchLocationDetails(electionDetails.locationId);
+  
+        if (response.data && response.data.locationId) {
+          await fetchLocationDetails(response.data.locationId);
         }
       } catch (err) {
         setError("Could not fetch election details. " + err.message);
@@ -78,9 +80,10 @@ export const UpcomingElectionDetailsScreen = ({ route }) => {
         setLoading(false);
       }
     };
-
+  
     fetchElectionDetails();
   }, [electionId]);
+  
 
   if (loading) {
     return <ActivityIndicator size="large" />;
@@ -93,9 +96,7 @@ export const UpcomingElectionDetailsScreen = ({ route }) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{electionDetails?.description}</Text>
-      <Text style={styles.detail}>
-        Election ID: {electionDetails?.electionId}
-      </Text>
+
       <Text style={styles.detail}>
         Location:{" "}
         {locationDetails

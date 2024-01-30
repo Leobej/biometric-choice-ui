@@ -37,8 +37,8 @@ export const LoginScreen = () => {
           },
         }
       );
-
       const token = response.headers.authorization;
+      console.log(token);
       if (token) {
         // Save the token to AsyncStorage
         AsyncStorage.setItem("token", token);
@@ -50,7 +50,7 @@ export const LoginScreen = () => {
       if (error.response && error.response.status === 401) {
         Alert.alert("Login Failed", "Invalid email or password");
       } else {
-        Alert.alert("Login Error", `Failed to login: ${error.message}`);
+        Alert.alert("Login Error", `Username or password is incorrect`);
       }
     }
   };

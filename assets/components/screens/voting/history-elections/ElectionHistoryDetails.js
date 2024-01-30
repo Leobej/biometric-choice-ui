@@ -23,8 +23,6 @@ export const ElectionHistoryDetails = ({ route }) => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        console.log("Response ");
-        console.log(response.data);
         setElectionDetails(response.data);
         if (response.data && response.data.locationId) {
           await fetchLocationDetails(response.data.locationId);
@@ -58,8 +56,7 @@ export const ElectionHistoryDetails = ({ route }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log("Location details:");
-      console.log(response.data);
+
       setLocationDetails(response.data);
     } catch (error) {
       console.error("Error fetching location details:", error);
@@ -72,10 +69,15 @@ export const ElectionHistoryDetails = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{electionDetails.name}</Text>
-      <Text>{electionDetails.description}</Text>
-      <Text>{`Location: ${locationDetails.city}, ${locationDetails.street}, ${locationDetails.number}`}</Text>
-      <ElectionStatisticsPanel electionDetails={electionDetails} />
+      <Text style={styles.electionName}>{electionDetails.name}</Text>
+      <Text style={styles.description}>{electionDetails.description}</Text>
+      <Text style={styles.location}>
+        {`Location: ${locationDetails.city}, ${locationDetails.street}, ${locationDetails.number}`}
+      </Text>
+      <ElectionStatisticsPanel
+        electionDetails={electionDetails}
+        electionId={electionId}
+      />
     </View>
   );
 };
@@ -84,11 +86,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 10,
+    backgroundColor: "#f5f5f5", 
   },
-  title: {
-    fontSize: 24,
+  electionName: {
+    fontSize: 28,
     fontWeight: "bold",
+    marginBottom: 4,
+    color: "#2c3e50", 
   },
-  // ... additional styles
+  description: {
+    fontSize: 18,
+    fontWeight: "500",
+    marginBottom: 8,
+    color: "#34495e", 
+  },
+  location: {
+    fontSize: 16,
+    fontWeight: "400",
+    color: "#7f8c8d", 
+    marginBottom: 8, 
+  },
+  loadingText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 10, 
+  },
+
 });
