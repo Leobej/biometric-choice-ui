@@ -7,10 +7,13 @@ import { LoginScreen } from "./assets/components/screens/login/LoginScreen";
 import { VotingScreen } from "./assets/components/screens/voting/VotingScreen";
 import { ElectionHistory } from "./assets/components/screens/voting/history-elections/ElectionHistory";
 import { UserDashboard } from "./assets/components/screens/voting/UserDashboard";
-import { VotingInformation } from "./assets/components/screens/voting/VotingInformation";
+import { VotingInformation } from "./assets/components/screens/voting/voting-informations/VotingInformation";
 import { UpcomingElections } from "./assets/components/screens/voting/upcoming-elections/UpcomingElections";
 import { UpcomingElectionDetailsScreen } from "./assets/components/screens/voting/upcoming-elections/UpcomingElectionDetailsScreen";
 import { ElectionHistoryDetails } from "./assets/components/screens/voting/history-elections/ElectionHistoryDetails";
+import { VotingEligibility } from "./assets/components/screens/voting/voting-informations/VotingElegibility";
+import { HowToVote } from "./assets/components/screens/voting/voting-informations/HowToVote";
+import { HowToRegister } from "./assets/components/screens/voting/voting-informations/HowToRegister";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -29,6 +32,12 @@ export default function App() {
           <Stack.Screen name="VotingScreen" component={VotingScreen} />
           <Stack.Screen name="ElectionHistory" component={ElectionHistory} />
           <Stack.Screen name="UserDashboard" component={UserDashboard} />
+          <Stack.Screen name="HowToRegister" component={HowToRegister} />
+          <Stack.Screen name="HowToVote" component={HowToVote} />
+          <Stack.Screen
+            name="VotingEligibility"
+            component={VotingEligibility}
+          />
           <Stack.Screen
             name="VotingInformation"
             component={VotingInformation}

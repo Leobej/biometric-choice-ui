@@ -14,9 +14,9 @@ export const ElectionStatisticsPanel = ({ electionDetails, electionId }) => {
   const [index, setIndex] = React.useState(0);
 
   const [routes] = React.useState([
-    { key: "pie", title: "Pie" },
-    { key: "bar", title: "Bar" },
-    { key: "line", title: "Line" },
+    { key: "pie", title: "Voters Age Distribution" },
+    { key: "bar", title: "Candidates comparison" },
+    { key: "line", title: "Votes by day" },
       // { key: "histogram", title: "Hist" },
   ]);
 

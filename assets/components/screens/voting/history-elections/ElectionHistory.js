@@ -50,7 +50,7 @@ export const ElectionHistory = ({ navigation }) => {
           >
             <View style={styles.panel}>
               {/* <Text style={styles.title}>{election.name}</Text> */}
-              <Text style={styles.title}>{election.description}</Text>
+              <Text style={styles.panelTitle}>{election.description}</Text>
               <Text style={styles.panelText}>{`Start Date: ${new Date(
                 election.startDate
               ).toLocaleDateString()}`}</Text>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   title: {
-    fontSize: 32,
+    fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 16,
@@ -87,13 +87,13 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
   },
   panelTitle: {
-    fontSize: 26, // Increased font size
+    fontSize: 26, 
     fontWeight: "bold",
-    textAlign: "center", // Centered text
+    textAlign: "center", 
   },
   panelText: {
-    fontSize: 18, // Increased font size for regular text
-    textAlign: "center", // Centered text
-    marginTop: 4, // Optional spacing for better readability
+    fontSize: 18, 
+    textAlign: "center", 
+    marginTop: 4, 
   },
 });

@@ -23,10 +23,12 @@ export const ElectionHistoryDetails = ({ route }) => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
+
         setElectionDetails(response.data);
         if (response.data && response.data.locationId) {
           await fetchLocationDetails(response.data.locationId);
         }
+        
       } catch (error) {
         if (error.response) {
           console.error(error.response.data);
