@@ -11,11 +11,11 @@ const BarChartScreen = ({ electionDetails, electionId }) => {
   const [loading, setLoading] = useState(true);
 
   const chartConfig = {
-    backgroundGradientFrom: "#f7b733", // Warm yellow
+    backgroundGradientFrom: "#f7b733", 
     backgroundGradientFromOpacity: 0.5,
-    backgroundGradientTo: "#fc4a1a", // Vibrant orange
+    backgroundGradientTo: "#fc4a1a", 
     backgroundGradientToOpacity: 0.8,
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // White text
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
     strokeWidth: 2,
     barPercentage: 0.5,
     barColors: [
@@ -54,7 +54,7 @@ const BarChartScreen = ({ electionDetails, electionId }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Combine and sort data
+
       const sortedCandidates = electionResponse.data.candidates
         .map((candidate) => {
           return {
@@ -67,6 +67,7 @@ const BarChartScreen = ({ electionDetails, electionId }) => {
         })
         .sort((a, b) => b.voteCount - a.voteCount);
 
+        console.log("Sorted Candidates:", sortedCandidates);
       // Format data for bar chart
       const labels = sortedCandidates.map(
         (candidate) => `${candidate.firstname} ${candidate.lastname}`
